@@ -82,13 +82,13 @@ public class TestClassForGitAutotest {
 //        driver.manage().timeouts().implicitlyWait(3,TimeUnit.SECONDS);
         optButton.click();
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='home_children_button']")));
-//        WebElement waiting = driver.findElement(By.xpath("//a[@id='home_children_button']"));
+        WebElement waiting = driver.findElement(By.xpath("//div[@id='app']"));
 //        System.out.println(waiting.getAttribute("value"));
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='app']")));
         WebElement messageCapcha = driver.findElement(By.xpath("//p[@class='sc-pFZIQ iFbWxK']"));
-//        System.out.println(messageCapcha.getAttribute("value"));
-        System.out.println(messageCapcha.getText());
-/*
+        System.out.println(messageCapcha.getAttribute("text"));
+//        System.out.println(messageCapcha.getText());
+/* TODO
         if (driver.findElement(By.xpath("//p[@id='home_children_body']")).equals("Пожалуйста‚ решите эту задачу‚ чтобы мы знали‚ что вы реальный человек")) {
             System.out.println("Я всего лишь автотест и не могу выполнить за тебя проверку на капчу. Автотест выполнен и закончен в виду блокирующего события ^_^");
         } else System.out.println("Autotest failed: something wrong in registration new user!");
