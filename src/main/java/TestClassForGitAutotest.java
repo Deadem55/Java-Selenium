@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TestClassForGitAutotest {
     public static void main(String[] args) throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\deade\\IdeaProjects\\testselenium\\drivers\\chromedriver.exe");
@@ -18,7 +20,7 @@ public class TestClassForGitAutotest {
 //        driver.manage().window().maximize();
         driver.get("https://github.com/");
 
-        WebElement menu = driver.findElement(By.xpath("//div/button[@class='btn-link d-lg-none mt-1 js-details-target']"));
+        WebElement menu = driver.findElement(By.xpath("//div/button[@class='js-details-target btn-link d-lg-none mt-1 color-fg-inherit']"));
         WebElement signIn = driver.findElement(By.xpath("//a[@class='HeaderMenu-link flex-shrink-0 no-underline']"));
 
         menu.click();
@@ -35,6 +37,8 @@ public class TestClassForGitAutotest {
         buttonSign.submit();
         WebElement messageBox = driver.findElement(By.xpath("//body/div/main/div/div[2]/div/div[@class='container-lg px-2']"));
         System.out.println("Статус авторизации: " + messageBox.getText());
+
+//        assertEquals("Incorrect username or password", messageBox.getText()); // выкидывать exception если не в компоненте отсутствует ожидаемое значение
 
         if (messageBox.getText().equals("Incorrect username or password")) {
             System.out.println("Autotest failed authorisation: Success!");
@@ -64,7 +68,7 @@ public class TestClassForGitAutotest {
         emailButton.click();
 
         WebElement newPassword = driver.findElement(By.xpath("//input[@id='password']"));
-        newPassword.sendKeys("QwErTy1234");
+        newPassword.sendKeys("NewPasswordSomeKey20and666");
         WebElement passwordButton = driver.findElement(By.xpath("//div[2]/div/button[contains(@class, 'js-continue-button signup-continue-button form-control')]"));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[2]/div/button[contains(@class, 'js-continue-button signup-continue-button form-control')]")));
         passwordButton.click();
@@ -82,12 +86,12 @@ public class TestClassForGitAutotest {
 //        driver.manage().timeouts().implicitlyWait(3,TimeUnit.SECONDS);
         optButton.click();
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='home_children_button']")));
-        WebElement waiting = driver.findElement(By.xpath("//div[@id='app']"));
+//        WebElement waiting = driver.findElement(By.xpath("//div[@id='app']"));
 //        System.out.println(waiting.getAttribute("value"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='app']")));
-        WebElement messageCapcha = driver.findElement(By.xpath("//p[@class='sc-pFZIQ iFbWxK']"));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/iframe")));
+        WebElement messageCapcha = driver.findElement(By.xpath("/html/body/div/div/div[1]/p[@class='sc-pNWdM ibiNwg']"));
         System.out.println(messageCapcha.getAttribute("text"));
-//        System.out.println(messageCapcha.getText());
+        System.out.println(messageCapcha.getText());
 /* TODO
         if (driver.findElement(By.xpath("//p[@id='home_children_body']")).equals("Пожалуйста‚ решите эту задачу‚ чтобы мы знали‚ что вы реальный человек")) {
             System.out.println("Я всего лишь автотест и не могу выполнить за тебя проверку на капчу. Автотест выполнен и закончен в виду блокирующего события ^_^");
